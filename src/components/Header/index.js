@@ -36,7 +36,7 @@ class Header extends React.Component {
     return (
       <div className="header-container">
         <h1>养成一个新习惯只需要 21 天</h1>
-        <p>{time}</p>
+        <span className="header-time">{time}</span>
       </div>
     );
   }
