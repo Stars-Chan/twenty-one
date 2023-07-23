@@ -24,7 +24,7 @@ class Item extends React.Component {
           <img src={imageUrl} className="item-checkbox"></img>
           <div className="item-content">
             <div>{name}</div>
-            <div>{count}</div>
+            <div className="item-count">{count}</div>
           </div>
         </button>
       </div>

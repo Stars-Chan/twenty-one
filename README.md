@@ -127,3 +127,11 @@ npm run deploy
 ```
 
 配置完之后，twenty-one 仓库会多了一个 `gh-pages` 分支，存放的是项目打包编译完成之后的静态文件，在 `Settings -> Pages` 下，可以看到项目已经被成功部署
+
+### 5-重新部署
+
+将修改后代码同步到远程仓库后部署
+
+```
+npm run deploy
+```
