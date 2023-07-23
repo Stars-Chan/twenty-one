@@ -3,7 +3,9 @@
 20230723: 上线 0.0.1 版本，具备了**养成新习惯**核心功能，[线上体验地址](https://stars-chan.github.io/twenty-one/)
 ![Alt text](home.jpg)
 
-## 功能说明
+## 开发流程
+
+开发分支完成后，`merge` 到 `main` 分支后再部署
 
 v0.0.1（已上线）
 
