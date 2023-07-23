@@ -1,70 +1,129 @@
-# Getting Started with Create React App
+# 养成一个新习惯只需要 21 天
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+20230723: 上线 0.0.1 版本，具备了**养成新习惯**核心功能，[线上体验地址](https://stars-chan.github.io/twenty-one/)
+![Alt text](image.png)
 
-## Available Scripts
+## 功能说明
 
-In the project directory, you can run:
+v0.0.1
 
-### `npm start`
+- 栏目分布依据：`准备`(0)、`启航`(1-7)、`坚持`(8-14)、`冲刺` (15-20)、 `完成`(21)，括号内为习惯坚持天数
+- 养成习惯：输入需要养成的习惯
+- 删除习惯：点击进入删除模式，仅`准备`栏习惯可以被点击删除
+- 退出删除：退出删除模式，该状态下，点击某个习惯即表示当天完成该习惯
+- 每个习惯每天仅可被点击一次，坚持天数一旦中断，即重置为 0，回到`准备`栏
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 本地运行
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 1-克隆项目到本地:
 
-### `npm test`
+```
+git clone git@github.com:Stars-Chan/twenty-one.git
+cd twenty-one
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2-安装依赖并启动
 
-### `npm run build`
+```
+yarn
+yarn start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+或者
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+npm install
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3-打开项目
 
-### `npm run eject`
+推荐用谷歌浏览器打开 [http://localhost:3000](http://localhost:3000)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 部署到 `Github Page`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1-同步
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+将本地代码同步到 github 仓库上
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 2-修改 package.json 文件
 
-## Learn More
+（1）配置 homepage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+"homepage": "https://stars-chan.github.io/twenty-one",
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
 
-### Code Splitting
+（2）配置发布选项
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+"predeploy": "npm run build",
+"deploy": "gh-pages -d build"
+```
 
-### Analyzing the Bundle Size
+完整文件参考
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+{
+  "name": "twenty-one",
+  "version": "0.1.0",
+  "homepage": "https://stars-chan.github.io/twenty-one",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.1",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
+}
+```
 
-### Making a Progressive Web App
+### 3-安装 gh-pages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+npm install gh-pages --save-dev
+```
 
-### Advanced Configuration
+### 4-部署项目
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+npm run deploy
+```
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+配置完之后，twenty-one 仓库会多了一个 `gh-pages` 分支，存放的是项目打包编译完成之后的静态文件，在 `Settings -> Pages` 下，可以看到项目已经被成功部署
