@@ -1,7 +1,7 @@
 # 养成一个新习惯只需要 21 天
 
 20230723: 上线 0.0.1 版本，具备了**养成新习惯**核心功能，[线上体验地址](https://stars-chan.github.io/twenty-one/)
-![Alt text](image.png)
+![Alt text](home.jpg)
 
 ## 功能说明
 
