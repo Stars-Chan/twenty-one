@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("./assets/images/wood-desktop.jpg");
+  background-size: cover;
+  /* 设置背景的重复方式，可以是 no-repeat、repeat-x、repeat-y 或 repeat */
+  background-repeat: no-repeat;
+  /* 设置背景的位置，可以是像素值或关键字，比如 center、left、right、top、bottom 等 */
+  background-position: center;
+  /* 设置背景的固定或滚动方式，可以是 fixed 或 scroll */
+  background-attachment: fixed;
+  /* 设置背景颜色作为图片加载的占位符，如果图片还未加载完成或加载失败时显示 */
+  background-color: #f0f0f0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

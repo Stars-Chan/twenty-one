@@ -1,0 +1,161 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+}
+
+.home-container {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  background-image: url("./assets/images/paper.jpg");
+  background-size: cover;
+  /* 设置背景的重复方式，可以是 no-repeat、repeat-x、repeat-y 或 repeat */
+  background-repeat: no-repeat;
+  /* 设置背景的位置，可以是像素值或关键字，比如 center、left、right、top、bottom 等 */
+  background-position: center;
+  /* 设置背景的固定或滚动方式，可以是 fixed 或 scroll */
+  background-attachment: fixed;
+  /* 设置背景颜色作为图片加载的占位符，如果图片还未加载完成或加载失败时显示 */
+  background-color: #f0f0f0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: end;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: 0 8px;
+}
+
+/* 准备栏 */
+.prepare-container {
+  background-color: rgb(95, 92, 92, 0.3);
+  min-height: 500px;
+  width: 100%;
+}
+
+.prepare-function {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 5px 0;
+}
+
+.create-button {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 14px;
+  color: #ffffff;
+  background-image: linear-gradient(to right, #3498db, #2980b9);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.create-button:active {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.edit-button {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 14px;
+  color: #ffffff;
+  background-image: linear-gradient(to right, #e74c3c, #c0392b);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.edit-button:active {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.arrive-container {
+  background-color: rgba(66, 174, 66, 0.3);
+  min-height: 500px;
+  width: 100%;
+}
+
+.journey-container {
+  background-color: rgb(90, 96, 202, 0.3);
+  min-height: 500px;
+  width: 100%;
+}
+
+.sprint-container {
+  background-color: rgb(200, 158, 80, 0.3);
+  min-height: 500px;
+  width: 100%;
+}
+
+.start-container {
+  background-color: rgb(203, 203, 139, 0.3);
+  min-height: 500px;
+  width: 100%;
+}
+
+/* Item */
+.item-container {
+  width: 100%;
+}
+
+.item-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(95, 92, 92, 0.3);
+  border-width: 0;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 2px 0;
+}
+
+.item-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.star-image {
+  width: 20px;
+  height: 20px;
+  opacity: 0.3;
+}
