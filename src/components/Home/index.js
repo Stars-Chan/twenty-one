@@ -1,170 +1,153 @@
-import React from "react";
-import Arrive from "../../pages/Arrive";
-import Journey from "../../pages/Journey";
-import Prepare from "../../pages/Prepare";
-import Sprint from "../../pages/Sprint";
-import Start from "../../pages/Start";
-import star from "../../assets/images/star.png";
+import React, { useEffect, useState } from 'react';
+import Arrive from '../../pages/Arrive';
+import Journey from '../../pages/Journey';
+import Prepare from '../../pages/Prepare';
+import Sprint from '../../pages/Sprint';
+import Start from '../../pages/Start';
+import star from '../../assets/images/star.png';
+import { getTimeUntilNextDay } from '../../util/HandleTime';
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    const habitDataStorage = localStorage.getItem("habitData");
-    const editStatusStorage = localStorage.getItem("editStatus");
-    this.state = {
-      habitData: habitDataStorage ? JSON.parse(habitDataStorage) : [],
-      editStatus: JSON.parse(editStatusStorage),
+export default function Home() {
+  // 从 localStorage 里面获取数据
+  const habitDataStorage = localStorage.getItem('habitData');
+  // 初始化 habitData、timeUntilNextDay
+  const initHabitData = habitDataStorage ? JSON.parse(habitDataStorage) : [];
+  const initTimeUntilNextDay = getTimeUntilNextDay();
+  const [habitData, setHabitData] = useState(initHabitData);
+  const [timeUntilNextDay, setTimeUntilNextDay] =
+    useState(initTimeUntilNextDay);
+  const [editStatus, setEditStatus] = useState(false);
+
+  // 每次改动 habitData 都写入到 localStorage
+  useEffect(() => {
+    window.addEventListener('beforeunload', saveDataToLocalStorage);
+
+    return () => {
+      window.removeEventListener('beforeunload', saveDataToLocalStorage);
     };
-  }
+  }, [habitData]);
 
-  // 在组件挂载后，设置一个监听器来保存 data 到 localStorage
-  componentDidMount() {
-    window.addEventListener("beforeunload", this.saveDataToLocalStorage);
-    const timeUntilNextDay = this.getTimeUntilNextDay();
-    this.timer = setTimeout(() => {
-      this.resetHabitStatus();
+  // 确保每天 0 点更新一次状态
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      resetHabitStatus();
     }, timeUntilNextDay);
-  }
 
-  // 在组件卸载前，移除监听器
-  componentWillUnmount() {
-    window.removeEventListener("beforeunload", this.saveDataToLocalStorage);
-    clearTimeout(this.timer);
-  }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [timeUntilNextDay]);
 
-  // 获取距离明天 0 点的时间间隔（以毫秒为单位）
-  getTimeUntilNextDay = () => {
-    const currentTimestamp = Date.now();
-    const date = new Date();
-    date.setHours(0, 0, 0, 0);
-    // 下一天的起始时间
-    const nextDayTimestamp = date.getTime() + 24 * 60 * 60 * 1000;
-    return nextDayTimestamp - currentTimestamp;
-  };
-
-  resetHabitStatus = () => {
-    const { habitData = [] } = this.state;
-    this.setState({
-      habitData: habitData.map((item) => {
-        if (item.count >= 21) {
-          return item;
-        }
-        if (!item.isCheck && item.count > 0) {
-          return { ...item, count: 0 };
-        }
-        return { ...item, isCheck: false };
-      }),
+  // 更新状态
+  const resetHabitStatus = () => {
+    const updateHabitData = habitData.map((item) => {
+      // 达到 21 天的不再更新
+      if (item.count >= 21) {
+        return item;
+      }
+      // 出现断更，即重置为 0 天
+      if (!item.isCheck && item.count > 0) {
+        return { ...item, count: 0 };
+      }
+      return { ...item, isCheck: false };
     });
-    const timeUntilNextDay = this.getTimeUntilNextDay();
-    this.timer = setTimeout(() => {
-      this.resetHabitStatus();
-    }, timeUntilNextDay);
+    setHabitData(updateHabitData);
+    // 重置更新时间
+    const updateTimeUntilNextDay = getTimeUntilNextDay();
+    setTimeUntilNextDay(updateTimeUntilNextDay);
   };
 
   // 保存 data 到 localStorage
-  saveDataToLocalStorage = () => {
-    const { habitData = [], editStatus } = this.state;
-    localStorage.setItem("habitData", JSON.stringify(habitData));
-    localStorage.setItem("editStatus", JSON.stringify(editStatus || false));
+  const saveDataToLocalStorage = () => {
+    localStorage.setItem('habitData', JSON.stringify(habitData));
   };
 
-  createHabit = () => {
-    const { habitData } = this.state;
+  const createHabit = () => {
     // 使用 prompt() 方法弹出对话框，让用户输入信息
-    const userInput = window.prompt("请输入您要养成的习惯：", "");
-    // 用户点击确定按钮后，userInput 将保存用户输入的内容
+    const userInput = window.prompt('请输入您要养成的习惯：', '');
     if (userInput && userInput.trim()) {
-      habitData.push({
+      const updateHabitData = habitData.concat({
         name: userInput,
         count: 0,
         isCheck: false,
         id: new Date().getTime(),
       });
-      this.setState({ habitData });
+      setHabitData(updateHabitData);
     } else if (userInput) {
-      alert("您未输入有效文本！");
+      alert('您未输入有效文本！');
     }
   };
 
-  editHabit = () => {
-    const { editStatus } = this.state;
-    console.log("editStatus", editStatus);
-    this.setState({ editStatus: !editStatus });
+  const editHabit = () => {
+    setEditStatus(!editStatus);
   };
 
-  modifyStatus = (id) => {
-    const { habitData = [], editStatus } = this.state;
+  const modifyStatus = (id) => {
     const targetData = habitData.find((item) => item.id === id) || {};
     if (editStatus) {
       const isDetele = window.confirm(`您确定删除习惯“${targetData.name}”吗？`);
       if (isDetele) {
-        this.setState({
-          habitData: habitData.filter((item) => item.id !== id) || [],
-        });
+        const updateHabitData =
+          habitData.filter((item) => item.id !== id) || [];
+        setHabitData(updateHabitData);
       }
     } else {
       if (targetData.count >= 21) return;
-      this.setState({
-        habitData: habitData.map((item) => {
-          if (item.id === id) {
-            return { ...item, count: item.count + 1, isCheck: true };
-          }
-          return item;
-        }),
+      const updateHabitData = habitData.map((item) => {
+        if (item.id === id) {
+          return { ...item, count: item.count + 1, isCheck: true };
+        }
+        return item;
       });
+      setHabitData(updateHabitData);
     }
   };
 
-  render() {
-    const { editStatus, habitData } = this.state;
-    const prepareData = [];
-    const startData = [];
-    const journeyData = [];
-    const sprintData = [];
-    const arriveData = [];
-    habitData.forEach((item) => {
-      const { count = 0 } = item;
-      if (count < 1) {
-        prepareData.push(item);
-      } else if (count < 8) {
-        startData.push(item);
-      } else if (count < 15) {
-        journeyData.push(item);
-      } else if (count < 21) {
-        sprintData.push(item);
-      } else {
-        arriveData.push(item);
-      }
-    });
-    return (
-      <div className="home-container">
-        <Prepare
-          prepareData={prepareData}
-          editStatus={editStatus}
-          editHabit={this.editHabit}
-          createHabit={this.createHabit}
-          modifyStatus={this.modifyStatus}
-        />
-        <Start startData={startData} modifyStatus={this.modifyStatus} />
-        <Journey journeyData={journeyData} modifyStatus={this.modifyStatus} />
-        <Sprint sprintData={sprintData} modifyStatus={this.modifyStatus} />
-        <Arrive arriveData={arriveData} modifyStatus={this.modifyStatus} />
-        {arriveData.map((item) => (
-          <div
-            key={item.id}
-            style={{
-              position: "absolute",
-              top: `${item.id % 100}%`,
-              left: `${item.id % 100}%`,
-              transform: `rotate(${item.id % 100}deg)`,
-            }}
-          >
-            <img className="star-image" src={star} alt="" />
-          </div>
-        ))}
-      </div>
-    );
-  }
+  const prepareData = [];
+  const startData = [];
+  const journeyData = [];
+  const sprintData = [];
+  const arriveData = [];
+  habitData.forEach((item) => {
+    const { count = 0 } = item;
+    if (count < 1) {
+      prepareData.push(item);
+    } else if (count < 8) {
+      startData.push(item);
+    } else if (count < 15) {
+      journeyData.push(item);
+    } else if (count < 21) {
+      sprintData.push(item);
+    } else {
+      arriveData.push(item);
+    }
+  });
+  return (
+    <div className="home-container">
+      <Prepare
+        prepareData={prepareData}
+        editStatus={editStatus}
+        editHabit={editHabit}
+        createHabit={createHabit}
+        modifyStatus={modifyStatus}
+      />
+      <Start startData={startData} modifyStatus={modifyStatus} />
+      <Journey journeyData={journeyData} modifyStatus={modifyStatus} />
+      <Sprint sprintData={sprintData} modifyStatus={modifyStatus} />
+      <Arrive arriveData={arriveData} modifyStatus={modifyStatus} />
+      {arriveData.map((item) => (
+        <div
+          key={item.id}
+          style={{
+            position: 'absolute',
+            top: `${item.id % 100}%`,
+            left: `${item.id % 100}%`,
+            transform: `rotate(${item.id % 100}deg)`,
+          }}
+        >
+          <img className="star-image" src={star} alt="" />
+        </div>
+      ))}
+    </div>
+  );
 }
-
-export default Home;
