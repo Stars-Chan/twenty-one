@@ -6,7 +6,12 @@ export default function Item(props) {
   const handleCheck = () => {
     const { itemData = {}, modifyStatus } = props;
     const { id, isCheck } = itemData;
-    !isCheck && modifyStatus(id);
+    if (isCheck) {
+      const isPlusOne = window.confirm('您已经完成当天任务，是否继续累加？');
+      isPlusOne && modifyStatus(id);
+    } else {
+      modifyStatus(id);
+    }
   };
   const { itemData = {} } = props;
   const { name, count, isCheck } = itemData;

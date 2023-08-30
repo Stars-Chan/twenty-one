@@ -82,6 +82,10 @@ export default function Home() {
     setEditStatus(!editStatus);
   };
 
+  const manualReset = () => {
+    setTimeUntilNextDay(0);
+  };
+
   const modifyStatus = (id) => {
     const targetData = habitData.find((item) => item.id === id) || {};
     if (editStatus) {
@@ -129,6 +133,7 @@ export default function Home() {
         editStatus={editStatus}
         editHabit={editHabit}
         createHabit={createHabit}
+        manualReset={manualReset}
         modifyStatus={modifyStatus}
       />
       <Start startData={startData} modifyStatus={modifyStatus} />
