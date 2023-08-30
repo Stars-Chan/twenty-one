@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/twenty-one/static/css/main.c74bab0f.css",
-    "main.js": "/twenty-one/static/js/main.8b4dea6f.js",
+    "main.css": "/twenty-one/static/css/main.e40944b3.css",
+    "main.js": "/twenty-one/static/js/main.a6f33e2c.js",
     "static/media/wood-desktop.jpg": "/twenty-one/static/media/wood-desktop.bda97ceef63db3d06f75.jpg",
     "static/media/paper.jpg": "/twenty-one/static/media/paper.5aa7cd29c43588556859.jpg",
     "index.html": "/twenty-one/index.html",
-    "main.c74bab0f.css.map": "/twenty-one/static/css/main.c74bab0f.css.map",
-    "main.8b4dea6f.js.map": "/twenty-one/static/js/main.8b4dea6f.js.map"
+    "main.e40944b3.css.map": "/twenty-one/static/css/main.e40944b3.css.map",
+    "main.a6f33e2c.js.map": "/twenty-one/static/js/main.a6f33e2c.js.map"
   },
   "entrypoints": [
-    "static/css/main.c74bab0f.css",
-    "static/js/main.8b4dea6f.js"
+    "static/css/main.e40944b3.css",
+    "static/js/main.a6f33e2c.js"
   ]
 }
