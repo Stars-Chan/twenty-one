@@ -1,6 +1,12 @@
-import Item from "../Item";
+import React from 'react';
+import Item from '../Item';
 
-export default function Section(props) {
+interface IProps {
+  sectionData: any[];
+  modifyStatus: Function;
+}
+
+export default function Section(props: IProps) {
   const { sectionData = [], modifyStatus } = props;
   return (
     <div className="section-container">

@@ -1,5 +1,5 @@
 // 计算距离明天 0 点的时间间隔（以毫秒为单位）
-export const getTimeUntilNextDay = () => {
+export const getTimeUntilNextDay = (): number => {
   const currentTimestamp = Date.now();
   const date = new Date();
   date.setHours(0, 0, 0, 0);
@@ -9,7 +9,7 @@ export const getTimeUntilNextDay = () => {
 };
 
 // 时间格式化
-export const formattedTime = (currentTime) => {
+export const formattedTime = (currentTime: Date): string => {
   const years = currentTime.getFullYear();
   const months = String(currentTime.getMonth() + 1).padStart(2, '0');
   const days = String(currentTime.getDate()).padStart(2, '0');

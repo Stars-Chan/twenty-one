@@ -1,6 +1,12 @@
-import Section from '../../components/Section';
+import React from 'react';
+import Section from '@components/Section';
 
-export default function Journey(props) {
+interface IProps {
+  journeyData: any[];
+  modifyStatus: Function;
+}
+
+export default function Journey(props: IProps) {
   const { journeyData, modifyStatus } = props;
   return (
     <div className="journey-container">

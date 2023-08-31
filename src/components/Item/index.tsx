@@ -1,8 +1,14 @@
-import checkbox from '../../assets/images/checkbox.png';
-import checked from '../../assets/images/checked.png';
-import arrived from '../../assets/images/arrived.png';
+import React from 'react';
+import checkbox from '@assets/images/checkbox.png';
+import checked from '@/assets/images/checked.png';
+import arrived from '@assets/images/arrived.png';
 
-export default function Item(props) {
+interface IProps {
+  itemData: any;
+  modifyStatus: Function;
+}
+
+export default function Item(props: IProps) {
   const handleCheck = () => {
     const { itemData = {}, modifyStatus } = props;
     const { id, isCheck } = itemData;
@@ -24,7 +30,7 @@ export default function Item(props) {
   return (
     <div className="item-container">
       <button onClick={handleCheck} className="item-button">
-        <img src={imageUrl} className="item-checkbox"></img>
+        <img src={imageUrl} className="item-checkbox" alt="cheked or not" />
         <div className="item-content">
           <div>{name}</div>
           <div className="item-count">{count}</div>

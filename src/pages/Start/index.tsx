@@ -1,6 +1,12 @@
-import Section from '../../components/Section';
+import React from 'react';
+import Section from '@components/Section';
 
-export default function Start(props) {
+interface IProps {
+  startData: any[];
+  modifyStatus: Function;
+}
+
+export default function Start(props: IProps) {
   const { startData, modifyStatus } = props;
   return (
     <div className="start-container">

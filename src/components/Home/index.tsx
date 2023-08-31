@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Arrive from '../../pages/Arrive';
-import Journey from '../../pages/Journey';
-import Prepare from '../../pages/Prepare';
-import Sprint from '../../pages/Sprint';
-import Start from '../../pages/Start';
-import star from '../../assets/images/star.png';
-import { getTimeUntilNextDay } from '../../util/HandleTime';
+import Arrive from '@pages/Arrive';
+import Journey from '@pages/Journey';
+import Prepare from '@pages/Prepare';
+import Sprint from '@pages/Sprint';
+import Start from '@pages/Start';
+import star from '@assets/images/star.png';
+import { getTimeUntilNextDay } from '@util/HandleTime';
+import { IHabitData } from '@interfaces/IHabitData';
 
 export default function Home() {
   // 从 localStorage 里面获取数据
   const habitDataStorage = localStorage.getItem('habitData');
   // 初始化 habitData、timeUntilNextDay
-  const initHabitData = habitDataStorage ? JSON.parse(habitDataStorage) : [];
+  const initHabitData: IHabitData[] = habitDataStorage
+    ? JSON.parse(habitDataStorage)
+    : [];
   const initTimeUntilNextDay = getTimeUntilNextDay();
   const [habitData, setHabitData] = useState(initHabitData);
   const [timeUntilNextDay, setTimeUntilNextDay] =
@@ -86,8 +89,9 @@ export default function Home() {
     setTimeUntilNextDay(0);
   };
 
-  const modifyStatus = (id) => {
-    const targetData = habitData.find((item) => item.id === id) || {};
+  const modifyStatus = (id: number) => {
+    const targetData = habitData.find((item) => item.id === id);
+    if (!targetData) return;
     if (editStatus) {
       const isDetele = window.confirm(`您确定删除习惯“${targetData.name}”吗？`);
       if (isDetele) {
@@ -107,11 +111,11 @@ export default function Home() {
     }
   };
 
-  const prepareData = [];
-  const startData = [];
-  const journeyData = [];
-  const sprintData = [];
-  const arriveData = [];
+  const prepareData: IHabitData[] = [];
+  const startData: IHabitData[] = [];
+  const journeyData: IHabitData[] = [];
+  const sprintData: IHabitData[] = [];
+  const arriveData: IHabitData[] = [];
   habitData.forEach((item) => {
     const { count = 0 } = item;
     if (count < 1) {
@@ -150,7 +154,7 @@ export default function Home() {
             transform: `rotate(${item.id % 100}deg)`,
           }}
         >
-          <img className="star-image" src={star} alt="" />
+          <img className="star-image" src={star} alt="stars" />
         </div>
       ))}
     </div>

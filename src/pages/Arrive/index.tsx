@@ -1,6 +1,12 @@
-import Section from '../../components/Section';
+import React from 'react';
+import Section from '@components/Section';
 
-export default function Arrive(props) {
+interface IProps {
+  arriveData: any[];
+  modifyStatus: Function;
+}
+
+export default function Arrive(props: IProps) {
   const { arriveData, modifyStatus } = props;
   return (
     <div className="arrive-container">
