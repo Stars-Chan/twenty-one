@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Arrive from '@pages/Arrive';
-import Journey from '@pages/Journey';
-import Prepare from '@pages/Prepare';
-import Sprint from '@pages/Sprint';
-import Start from '@pages/Start';
-import star from '@assets/images/star.png';
-import { getTimeUntilNextDay } from '@util/HandleTime';
-import { IHabitData } from '@interfaces/IHabitData';
+import Arrive from '@/pages/Arrive';
+import Journey from '@/pages/Journey';
+import Prepare from '@/pages/Prepare';
+import Sprint from '@/pages/Sprint';
+import Start from '@/pages/Start';
+import star from '@/assets/images/star.png';
+import { getTimeUntilNextDay } from '@/util/HandleTime';
+import { IHabitData } from '@/interfaces/IHabitData';
 
 export default function Home() {
   // 从 localStorage 里面获取数据

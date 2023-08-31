@@ -1,7 +1,7 @@
 import React from 'react';
-import checkbox from '@assets/images/checkbox.png';
+import checkbox from '@/assets/images/checkbox.png';
 import checked from '@/assets/images/checked.png';
-import arrived from '@assets/images/arrived.png';
+import arrived from '@/assets/images/arrived.png';
 
 interface IProps {
   itemData: any;

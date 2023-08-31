@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { formattedTime } from '../../util/HandleTime';
+import { formattedTime } from '@/util/HandleTime';
 
 export default function Header() {
   const [time, setTime] = useState(new Date());
